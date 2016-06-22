@@ -30,15 +30,67 @@ allowedResponses = ["a", "b", "c", "d", "e"]
 
 while len(playerDeck) > 0 and len(computerDeck) > 0:
     
-    playerCard = playerDeck.pop[0]
-    computerCard = computerDeck.pop[0]
+    playerCard = playerDeck.pop(0)
+    computerCard = computerDeck.pop(0)
 
-    print("Name:", thisCard.name)
-    print("1. Height:", thisCard.height)
-    print("2. Caps:", thisCard.caps)
-    print("3. Metres made:", thisCard.metres)
-    print("4. Tackles made:", thisCard.tackles)
-    print("5. Penalties conceded:", thisCard.penalties)
+    print("YOUR CARD")
+    print("Name:", playerCard.name)
+    print("a. Height:", playerCard.height)
+    print("b. Caps:", playerCard.caps)
+    print("c. Metres made:", playerCard.metres)
+    print("d. Tackles made:", playerCard.tackles)
+    print("e. Penalties conceded:", playerCard.penalties)
     
     if playerTurn == True:
         answer = input("Which property do you choose? ")
+        while allowedResponses.count(answer) == 0:
+            answer = input("That isn't a valid answer, please try again: ")
+    else:
+        answer = random.choice(allowedResponses)
+        print("Computer chooses", answer)
+
+    print("COMPUTER CARD")
+    print("Name:", computerCard.name)
+
+    playerWins = False
+
+    if answer == "a":
+        print("Height:", computerCard.height)
+        isDraw = (playerCard.height == computerCard.height)
+        playerWins = (playerCard.height > computerCard.height)
+    elif answer == "b":
+        print("Caps:", computerCard.caps)
+        isDraw = (playerCard.caps == computerCard.caps)
+        playerWins = (playerCard.caps > computerCard.caps)
+    elif answer == "c":
+        print("Metres made:", computerCard.metres)
+        isDraw = (playerCard.metres == computerCard.metres)
+        playerWins = (playerCard.metres > computerCard.metres)
+    elif answer == "d":
+        print("Tackles made:", computerCard.tackles)
+        isDraw = (playerCard.tackles == computerCard.tackles)
+        playerWins = (playerCard.tackles > computerCard.tackles)
+    elif answer == "e":
+        print("Penalties conceded:", computerCard.penalties)
+        isDraw = (playerCard.penalties == computerCard.penalties)
+        playerWins = (playerCard.penalties < computerCard.penalties)
+
+    if isDraw:
+        print("It's a tie!")
+        playerDeck.append(playerCard)
+        computerDeck.append(computerCard)
+    elif playerWins:
+        print("You win this hand!")
+        playerDeck.append(playerCard)
+        playerDeck.append(computerCard)
+        playerTurn = True
+    else:
+        print("You lose this hand!")
+        computerDeck.append(computerCard)
+        computerDeck.append(playerCard)
+        playerTurn = False
+
+if len(playerDeck) == 0:
+    print("YOU LOSE!")
+else:
+    print("YOU WIN!")
