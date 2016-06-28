@@ -1,4 +1,5 @@
 import random
+import time
 
 class Card:
     def __init__(self, name, height, caps, metres, tackles, penalties):
@@ -30,6 +31,8 @@ allowedResponses = ["a", "b", "c", "d", "e"]
 
 while len(playerDeck) > 0 and len(computerDeck) > 0:
     
+    time.sleep(1)
+
     playerCard = playerDeck.pop(0)
     computerCard = computerDeck.pop(0)
 
@@ -41,6 +44,8 @@ while len(playerDeck) > 0 and len(computerDeck) > 0:
     print("d. Tackles made:", playerCard.tackles)
     print("e. Penalties conceded:", playerCard.penalties)
     
+    time.sleep(1)
+
     if playerTurn == True:
         answer = input("Which property do you choose? ")
         while allowedResponses.count(answer) == 0:
@@ -75,6 +80,8 @@ while len(playerDeck) > 0 and len(computerDeck) > 0:
         isDraw = (playerCard.penalties == computerCard.penalties)
         playerWins = (playerCard.penalties < computerCard.penalties)
 
+    time.sleep(1)
+
     if isDraw:
         print("It's a tie!")
         playerDeck.append(playerCard)
@@ -89,6 +96,8 @@ while len(playerDeck) > 0 and len(computerDeck) > 0:
         computerDeck.append(computerCard)
         computerDeck.append(playerCard)
         playerTurn = False
+
+time.sleep(2)
 
 if len(playerDeck) == 0:
     print("YOU LOSE!")
